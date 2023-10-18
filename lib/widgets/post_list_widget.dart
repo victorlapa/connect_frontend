@@ -17,7 +17,8 @@ class PostListWidget extends StatelessWidget {
         return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Card(
-              shadowColor: Colors.black,
+              elevation: 0,
+              color: Colors.transparent,
               margin: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
@@ -47,14 +48,20 @@ class PostListWidget extends StatelessWidget {
                     children: [
                       const Text(
                         'Agos Dalcin Rufino',
-                        style: TextStyle(fontWeight: FontWeight.w700),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700, color: Colors.white),
                       ),
-                      const Text('Eng. de Software',
+                      const Text('Eng. de Software - 4/8',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                          ),
                           textAlign: TextAlign.start),
                       Container(
                         height: 24,
                       ),
-                      Text(post.content),
+                      Text(post.content,
+                          style: const TextStyle(color: Colors.white)),
                     ],
                   )
                 ],

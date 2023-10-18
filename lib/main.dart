@@ -11,7 +11,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return SafeArea(
+        child: MaterialApp(
       title: 'Home',
       initialRoute: "/",
       theme: ThemeData(primarySwatch: Colors.red),
@@ -19,6 +20,6 @@ class MainApp extends StatelessWidget {
         '/': (context) => const HomeScreen(),
         '/userProfilePage': (context) => const ProfileScreen()
       },
-    );
+    ));
   }
 }
