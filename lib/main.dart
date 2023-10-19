@@ -17,7 +17,7 @@ class MainApp extends StatelessWidget {
       initialRoute: "/",
       theme: ThemeData(primarySwatch: Colors.red),
       routes: {
-        '/': (context) => const HomeScreen(),
+        '/': (context) => const ProfileScreen(),
         '/userProfilePage': (context) => const ProfileScreen()
       },
     ));

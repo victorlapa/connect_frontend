@@ -39,63 +39,57 @@ class _ProfileScreenState extends State<ProfileScreen> {
           users: List.empty()),
     ];
 
-    return Column(
-      children: [
-        Material(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(60.0),
-                  child: Image.network(
-                    height: 120,
-                    width: 120,
-                    'https://media.licdn.com/dms/image/D4D03AQGaFUImrwVdBw/profile-displayphoto-shrink_800_800/0/1693440924194?e=2147483647&v=beta&t=Gc0esUSYyWbXO6OFcZU4nNzJmRNg8XQzyVk9c4QYdsQ',
-                  ),
-                ),
-                Container(
-                  height: 24,
-                ),
-                const Text(
-                  'Agos Rufino',
-                  style: TextStyle(color: Colors.black, fontSize: 24),
-                ),
-                Container(
-                  height: 4,
-                ),
-                const Text(
-                  'Eng. de Software - 4/8',
-                  style: TextStyle(color: Colors.black, fontSize: 16),
-                ),
-                Container(
-                  height: 16,
-                ),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Image.network(
-                    'https://i.kym-cdn.com/photos/images/newsfeed/000/242/592/1c8.jpg',
-                    width: 64,
-                    height: 64,
-                  ),
-                  Container(width: 16),
-                  const Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Column(
-                        children: [
-                          Text('Grupitos'),
-                          Text('Ablublublue'),
-                        ],
-                      )
-                    ],
-                  )
-                ])
-              ],
-            ),
-          ),
-        )
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red[900],
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      body: Column(
+        children: [
+          Material(
+            child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(60.0),
+                          child: Image.network(
+                            height: 120,
+                            width: 120,
+                            'https://media.licdn.com/dms/image/D4D03AQGaFUImrwVdBw/profile-displayphoto-shrink_800_800/0/1693440924194?e=2147483647&v=beta&t=Gc0esUSYyWbXO6OFcZU4nNzJmRNg8XQzyVk9c4QYdsQ',
+                          ),
+                        ),
+                        Container(
+                          height: 24,
+                        ),
+                        const Text(
+                          'Agos Rufino',
+                          style: TextStyle(color: Colors.black, fontSize: 24),
+                        ),
+                        Container(
+                          height: 4,
+                        ),
+                        const Text(
+                          'Eng. de Software - 4/8',
+                          style: TextStyle(color: Colors.black, fontSize: 16),
+                        ),
+                        Container(
+                          height: 16,
+                        ),
+                      ],
+                    ),
+                    const Row(
+                      children: [
+                        Text('Fala galeraa'),
+                      ],
+                    )
+                  ],
+                )),
+          )
+        ],
+      ),
     );
   }
 }

@@ -39,10 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black87,
-      appBar: AppBar(
-        title: const Text('Oi'),
-        centerTitle: true,
-      ),
       body: FutureBuilder<List<Post>>(
         future: fetchPosts(),
         builder: (context, snapshot) {
