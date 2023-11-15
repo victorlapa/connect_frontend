@@ -1,7 +1,10 @@
 import 'package:connect_frontend/models/group.dart';
 import 'package:connect_frontend/models/user.dart';
+import 'package:connect_frontend/views/home.dart';
+import 'package:connect_frontend/views/wip.dart';
 import 'package:connect_frontend/widgets/group_list.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -40,9 +43,61 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.red[900],
-        iconTheme: const IconThemeData(color: Colors.white),
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: GNav(
+              gap: 4,
+              backgroundColor: Colors.white,
+              activeColor: Colors.red,
+              tabs: [
+                GButton(
+                    icon: Icons.home,
+                    text: 'Home',
+                    textColor: Colors.black,
+                    onPressed: () {
+                      if (ModalRoute.of(context)!.settings.name != '/') {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomeScreen(),
+                              settings: const RouteSettings(name: '/'),
+                            ));
+                      }
+                    }),
+                GButton(
+                    icon: Icons.person,
+                    text: 'Profile',
+                    textColor: Colors.black,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ProfileScreen()));
+                    }),
+                GButton(
+                    icon: Icons.search,
+                    text: 'Search',
+                    textColor: Colors.black,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const WipScreen()));
+                    }),
+                GButton(
+                    icon: Icons.settings,
+                    text: 'Settings',
+                    textColor: Colors.black,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const WipScreen()));
+                    }),
+              ],
+            )),
       ),
       body: Column(
         children: [
