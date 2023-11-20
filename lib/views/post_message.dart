@@ -1,23 +1,9 @@
 import 'dart:convert';
 
 import 'package:connect_frontend/models/send_post.dart';
+import 'package:connect_frontend/services/session_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: TweetScreen(),
-    );
-  }
-}
 
 class TweetScreen extends StatefulWidget {
   const TweetScreen({super.key});
@@ -31,11 +17,22 @@ class _TweetScreenState extends State<TweetScreen> {
   String tweetText = "";
   TextEditingController textController = TextEditingController();
 
+  Future<String> retrieveUserId() async {
+    Map<String, String> userPayload = await SessionService.getSessionInfo();
+    String userId = userPayload['userId'] ?? 'No user ID found';
+
+    print(userId);
+
+    return userId;
+  }
+
   Future<void> sendPostRequest() async {
     final url = Uri.parse('https://catolicaconnect-api.onrender.com/posts');
 
-    final sendPostData = SendPost(
-        authorId: 'clnq7bm5s0000bt1rhvv6g079', content: textController.text);
+    String userId = await retrieveUserId();
+
+    final sendPostData =
+        SendPost(authorId: userId, content: textController.text);
 
     final data = sendPostData.toJson();
 
@@ -51,6 +48,8 @@ class _TweetScreenState extends State<TweetScreen> {
     if (response.statusCode == 200) {
       // Request was successful, and you can work with the response data.
       print('Response data: ${response.body}');
+
+      Navigator.pushNamed(context, '/home');
     } else {
       // Request failed, handle the error.
       print('Request failed with status: ${response.statusCode}');

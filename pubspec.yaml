@@ -7,13 +7,14 @@ environment:
   sdk: ">=3.1.1 <4.0.0"
 
 dependencies:
-  aad_oauth: ^1.0.0
   convert: ^3.1.1
   cupertino_icons: ^1.0.6
   flutter:
     sdk: flutter
   google_nav_bar: ^5.0.6
   http: ^1.1.0
+  jwt_decoder: ^2.0.1
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:

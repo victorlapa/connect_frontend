@@ -1,34 +1,43 @@
 import 'dart:convert';
 
 import 'package:connect_frontend/main.dart';
-import 'package:connect_frontend/services/session_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _cursoController = TextEditingController();
+  final TextEditingController _periodoController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  Future<void> _login() async {
+  Future<void> _register() async {
+    String name = _nameController.text;
     String email = _emailController.text;
+    String tag = _usernameController.text;
+    String curso = _cursoController.text;
+    int periodo = int.parse(_periodoController.text);
     String password = _passwordController.text;
 
     BuildContext? context = navigatorKey.currentContext;
 
     // Add your API endpoint for registration
-    String apiUrl = 'https://catolicaconnect-api.onrender.com/login';
+    String apiUrl = 'https://catolicaconnect-api.onrender.com/users';
 
     Map<String, dynamic> requestBody = {
+      'name': name,
       'email': email,
+      'tag': tag,
+      'curso': curso,
+      'periodo': periodo,
       'password': password,
     };
 
@@ -46,24 +55,10 @@ class _LoginPageState extends State<LoginPage> {
         // Check the status code of the response
         if (response.statusCode == 200 || response.statusCode == 201) {
           // Registration successful
-          print('Logged in successfully');
-
-          final Map<String, dynamic> data = json.decode(response.body);
-
-          if (data.containsKey('token')) {
-            String token = data['token'];
-
-            Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
-
-            String userId = decodedToken['userId'];
-
-            SessionService.saveSessionInfo(token, userId);
-
-            Navigator.pushNamed(context, '/home');
-          }
+          print('Registration successful');
 
           // ignore: use_build_context_synchronously
-          Navigator.pushNamed(context, '/home');
+          Navigator.pushNamed(context, '/login');
         } else {
           // Registration failed
           print('Registration failed. Status code: ${response.statusCode}');
@@ -79,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login Page'),
+        title: Text('Register Page'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -87,8 +82,8 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              controller: _usernameController,
+              decoration: InputDecoration(labelText: 'Username'),
             ),
             SizedBox(height: 16),
             TextField(
@@ -97,9 +92,29 @@ class _LoginPageState extends State<LoginPage> {
               obscureText: true,
             ),
             SizedBox(height: 16),
+            TextField(
+              controller: _cursoController,
+              decoration: InputDecoration(labelText: 'Curso'),
+            ),
+            SizedBox(height: 16),
+            TextField(
+              controller: _periodoController,
+              decoration: InputDecoration(labelText: 'Periodo'),
+            ),
+            SizedBox(height: 16),
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(labelText: 'Email'),
+            ),
+            SizedBox(height: 16),
+            TextField(
+              controller: _nameController,
+              decoration: InputDecoration(labelText: 'Nome completo'),
+            ),
+            SizedBox(height: 32),
             ElevatedButton(
-              onPressed: _login,
-              child: Text('Login'),
+              onPressed: _register,
+              child: Text('Register'),
             ),
           ],
         ),

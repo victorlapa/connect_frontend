@@ -1,3 +1,4 @@
+import 'package:connect_frontend/main.dart';
 import 'package:flutter/material.dart';
 
 class Welcome extends StatelessWidget {
@@ -16,8 +17,15 @@ class Welcome extends StatelessWidget {
                 width: 150,
               ),
               ElevatedButton(
-                  onPressed: () {}, child: const Text('Cadastre-se')),
-              ElevatedButton(onPressed: () {}, child: const Text('Entrar')),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/register');
+                  },
+                  child: const Text('Cadastre-se')),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  child: const Text('Entrar')),
             ],
           ),
         ));
