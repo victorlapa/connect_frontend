@@ -1,3 +1,5 @@
+import 'package:connect_frontend/models/author.dart';
+
 class Post {
   final String id;
   final String content;
@@ -6,6 +8,7 @@ class Post {
   final String? imageUrl;
   final int likes;
   final String createdAt;
+  final Author author;
 
   Post({
     required this.id,
@@ -15,6 +18,7 @@ class Post {
     required this.imageUrl,
     required this.likes,
     required this.createdAt,
+    required this.author,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) {
@@ -26,6 +30,7 @@ class Post {
       imageUrl: json['imageUrl'],
       likes: json['likes'],
       createdAt: json['createdAt'],
+      author: Author.fromJson(json['author']),
     );
   }
 }

@@ -21,8 +21,6 @@ class _TweetScreenState extends State<TweetScreen> {
     Map<String, String> userPayload = await SessionService.getSessionInfo();
     String userId = userPayload['userId'] ?? 'No user ID found';
 
-    print(userId);
-
     return userId;
   }
 

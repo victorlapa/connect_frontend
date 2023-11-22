@@ -35,7 +35,7 @@ class PostListWidget extends StatelessWidget {
                       child: Image.network(
                         height: 40,
                         width: 40,
-                        'https://media.licdn.com/dms/image/D4D03AQGaFUImrwVdBw/profile-displayphoto-shrink_800_800/0/1693440924194?e=2147483647&v=beta&t=Gc0esUSYyWbXO6OFcZU4nNzJmRNg8XQzyVk9c4QYdsQ',
+                        post.author.profileImgUrl,
                       ),
                     ),
                   ),
@@ -46,12 +46,12 @@ class PostListWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Agos Dalcin Rufino',
+                      Text(
+                        post.author.name,
                         style: TextStyle(
                             fontWeight: FontWeight.w700, color: Colors.white),
                       ),
-                      const Text('Eng. de Software - 4/8',
+                      Text('${post.author.curso} - ${post.author.periodo}',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 10,
