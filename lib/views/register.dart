@@ -75,6 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Register Page'),
+        backgroundColor: Color.fromARGB(255, 167, 33, 65),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -82,39 +83,126 @@ class _RegisterPageState extends State<RegisterPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
+              controller: _nameController,
+              style: TextStyle(color: Colors.black),
+              decoration: InputDecoration(
+                labelText: 'Nome completo',
+                labelStyle: TextStyle(color: Colors.black),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 167, 33, 65),
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 167, 33, 65),
+                  ).copyWith(color: Colors.black.withOpacity(0.5)),
+                ),
+              ),
+            ),
+            SizedBox(height: 16),
+            TextField(
               controller: _usernameController,
-              decoration: InputDecoration(labelText: 'Username'),
+              style: TextStyle(color: Colors.black),
+              decoration: InputDecoration(
+                labelText: 'Username',
+                labelStyle: TextStyle(color: Colors.black),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 167, 33, 65),
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 167, 33, 65),
+                  ).copyWith(color: Colors.black.withOpacity(0.5)),
+                ),
+              ),
             ),
             SizedBox(height: 16),
             TextField(
               controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
+              style: TextStyle(color: Colors.black),
+              decoration: InputDecoration(
+                labelText: 'Password',
+                labelStyle: TextStyle(color: Colors.black),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 167, 33, 65),
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 167, 33, 65),
+                  ).copyWith(color: Colors.black.withOpacity(0.5)),
+                ),
+              ),
               obscureText: true,
             ),
             SizedBox(height: 16),
             TextField(
               controller: _cursoController,
-              decoration: InputDecoration(labelText: 'Curso'),
+              style: TextStyle(color: Colors.black),
+              decoration: InputDecoration(
+                labelText: 'Curso',
+                labelStyle: TextStyle(color: Colors.black),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 167, 33, 65),
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 167, 33, 65),
+                  ).copyWith(color: Colors.black.withOpacity(0.5)),
+                ),
+              ),
             ),
             SizedBox(height: 16),
             TextField(
               controller: _periodoController,
-              decoration: InputDecoration(labelText: 'Periodo'),
+              style: TextStyle(color: Colors.black),
+              decoration: InputDecoration(
+                labelText: 'Periodo',
+                labelStyle: TextStyle(color: Colors.black),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 167, 33, 65),
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 167, 33, 65),
+                  ).copyWith(color: Colors.black.withOpacity(0.5)),
+                ),
+              ),
             ),
             SizedBox(height: 16),
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            SizedBox(height: 16),
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(labelText: 'Nome completo'),
+              style: TextStyle(color: Colors.black),
+              decoration: InputDecoration(
+                labelText: 'Email',
+                labelStyle: TextStyle(color: Colors.black),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 167, 33, 65),
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 167, 33, 65),
+                  ).copyWith(color: Colors.black.withOpacity(0.5)),
+                ),
+              ),
             ),
             SizedBox(height: 32),
             ElevatedButton(
               onPressed: _register,
               child: Text('Register'),
+              style: ElevatedButton.styleFrom(
+                primary: Color.fromARGB(255, 167, 33, 65),
+              ),
             ),
           ],
         ),
