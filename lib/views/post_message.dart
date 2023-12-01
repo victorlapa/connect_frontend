@@ -1,15 +1,13 @@
 import 'dart:convert';
-
 import 'package:connect_frontend/models/send_post.dart';
 import 'package:connect_frontend/services/session_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class TweetScreen extends StatefulWidget {
-  const TweetScreen({super.key});
+  const TweetScreen({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _TweetScreenState createState() => _TweetScreenState();
 }
 
@@ -42,14 +40,10 @@ class _TweetScreenState extends State<TweetScreen> {
       body: dataJson,
     );
 
-    // Check the status code to determine if the request was successful.
     if (response.statusCode == 200 || response.statusCode == 201) {
-      // Request was successful, and you can work with the response data.
       print('Response data: ${response.body}');
-
       Navigator.pushNamed(context, '/home');
     } else {
-      // Request failed, handle the error.
       print('Request failed with status: ${response.statusCode}');
     }
   }
@@ -57,9 +51,6 @@ class _TweetScreenState extends State<TweetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tweet Message Screen'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -67,9 +58,20 @@ class _TweetScreenState extends State<TweetScreen> {
           children: <Widget>[
             TextField(
               controller: textController,
-              decoration:
-                  const InputDecoration(labelText: 'What\'s on your mind?'),
-              maxLength: 280, // Optional character limit
+              decoration: InputDecoration(
+                hintText: 'What\'s on your mind?',
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 167, 33, 65),
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 167, 33, 65),
+                  ),
+                ),
+              ),
+              maxLength: 280,
             ),
             const SizedBox(height: 10),
             Container(
@@ -84,15 +86,15 @@ class _TweetScreenState extends State<TweetScreen> {
               ),
             ),
             const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                IconButton(
-                  icon: const Icon(Icons.send),
-                  onPressed: () => sendPostRequest(),
-                  color: Colors.blue,
+            ElevatedButton(
+              onPressed: () => sendPostRequest(),
+              child: const Text('Send'),
+              style: ElevatedButton.styleFrom(
+                primary: Color.fromARGB(255, 167, 33, 65),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-              ],
+              ),
             ),
           ],
         ),
