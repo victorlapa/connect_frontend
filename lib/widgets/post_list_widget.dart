@@ -26,7 +26,8 @@ class PostListWidget extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const ProfileScreen(),
+                          builder: (context) =>
+                              ProfileScreen(userId: post.authorId),
                         ),
                       );
                     },

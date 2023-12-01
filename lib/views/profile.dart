@@ -7,25 +7,29 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  final String? userId;
+
+  const ProfileScreen({Key? key, this.userId}) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  late Future<Map<String, String>> _userFuture;
+  late Future<Map<String, dynamic>> _userFuture;
   late Future<Map<String, dynamic>> _user;
 
   @override
   void initState() {
     super.initState();
-    _userFuture = SessionService.getSessionInfo();
+    _userFuture = widget.userId != null
+        ? UserService.getUserById(widget.userId!)
+        : SessionService.getSessionInfo().then((userInfo) {
+            final userId = userInfo['userId'] ?? '';
+            return UserService.getUserById(userId);
+          });
 
-    _user = _userFuture.then((userInfo) {
-      final userId = userInfo['userId'] ?? '';
-      return UserService.getUserById(userId);
-    });
+    _user = _userFuture;
   }
 
   @override
