@@ -45,33 +45,36 @@ class PostListWidget extends StatelessWidget {
                   Container(
                     width: 12,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        post.author.name,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700, color: Colors.white),
-                      ),
-                      Text(
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          post.author.name,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, color: Colors.white),
+                        ),
+                        Text(
                           '${post.author.curso} - ${post.author.periodo} - ${formatRelativeTime(post.createdAt)}',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 10,
                           ),
-                          textAlign: TextAlign.start),
-                      Container(
-                        height: 24,
-                      ),
-                      Text(
-                        post.content,
-                        style: const TextStyle(color: Colors.white),
-                        maxLines: 100,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  )
+                          textAlign: TextAlign.start,
+                        ),
+                        Container(
+                          height: 24,
+                        ),
+                        Text(
+                          post.content,
+                          style: const TextStyle(color: Colors.white),
+                          maxLines: 100,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ));
