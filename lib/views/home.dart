@@ -68,16 +68,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                     }),
                 GButton(
-                    icon: Icons.person,
-                    text: 'Profile',
-                    textColor: Colors.black,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ProfileScreen()));
-                    }),
-                GButton(
                     icon: Icons.post_add,
                     text: 'Post',
                     textColor: Colors.black,
@@ -88,24 +78,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               builder: (context) => const TweetScreen()));
                     }),
                 GButton(
-                    icon: Icons.search,
-                    text: 'Search',
+                    icon: Icons.person,
+                    text: 'Profile',
                     textColor: Colors.black,
                     onPressed: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const WipScreen()));
-                    }),
-                GButton(
-                    icon: Icons.settings,
-                    text: 'Settings',
-                    textColor: Colors.black,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const WipScreen()));
+                              builder: (context) => const ProfileScreen()));
                     }),
               ],
             )),

@@ -43,7 +43,7 @@ class _TweetScreenState extends State<TweetScreen> {
     );
 
     // Check the status code to determine if the request was successful.
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       // Request was successful, and you can work with the response data.
       print('Response data: ${response.body}');
 

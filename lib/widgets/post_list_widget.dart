@@ -1,6 +1,8 @@
 import 'package:connect_frontend/models/post.dart';
 import 'package:connect_frontend/views/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class PostListWidget extends StatelessWidget {
   final List<Post> posts;
@@ -52,7 +54,8 @@ class PostListWidget extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.w700, color: Colors.white),
                       ),
-                      Text('${post.author.curso} - ${post.author.periodo}',
+                      Text(
+                          '${post.author.curso} - ${post.author.periodo} - ${formatRelativeTime(post.createdAt)}',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 10,
@@ -61,8 +64,12 @@ class PostListWidget extends StatelessWidget {
                       Container(
                         height: 24,
                       ),
-                      Text(post.content,
-                          style: const TextStyle(color: Colors.white)),
+                      Text(
+                        post.content,
+                        style: const TextStyle(color: Colors.white),
+                        maxLines: 100,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ],
                   )
                 ],
@@ -71,4 +78,13 @@ class PostListWidget extends StatelessWidget {
       },
     );
   }
+}
+
+String formatRelativeTime(String dateString) {
+  DateTime dateTime = DateTime.parse(dateString).toLocal();
+  Duration timeDifference = DateTime.now().toLocal().difference(dateTime);
+
+  String relativeTime = timeago.format(dateTime.subtract(timeDifference));
+
+  return relativeTime;
 }

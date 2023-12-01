@@ -2,6 +2,7 @@ import 'package:connect_frontend/models/post.dart';
 import 'package:connect_frontend/services/session_service.dart';
 import 'package:connect_frontend/services/user_service.dart';
 import 'package:connect_frontend/views/home.dart';
+import 'package:connect_frontend/views/post_message.dart';
 import 'package:connect_frontend/views/wip.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -72,6 +73,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             }
                           }),
                       GButton(
+                          icon: Icons.post_add,
+                          text: 'Post',
+                          textColor: Colors.black,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const TweetScreen()));
+                          }),
+                      GButton(
+                          active: true,
                           icon: Icons.person,
                           text: 'Profile',
                           textColor: Colors.black,
@@ -81,26 +93,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         const ProfileScreen()));
-                          }),
-                      GButton(
-                          icon: Icons.search,
-                          text: 'Search',
-                          textColor: Colors.black,
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const WipScreen()));
-                          }),
-                      GButton(
-                          icon: Icons.settings,
-                          text: 'Settings',
-                          textColor: Colors.black,
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const WipScreen()));
                           }),
                     ],
                   )),
