@@ -74,27 +74,15 @@ class _TweetScreenState extends State<TweetScreen> {
               maxLength: 280,
             ),
             const SizedBox(height: 10),
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Text(
-                tweetText,
-                style: const TextStyle(fontSize: 18),
-              ),
-            ),
-            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () => sendPostRequest(),
-              child: const Text('Send'),
               style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(255, 167, 33, 65),
+                backgroundColor: Color.fromARGB(255, 167, 33, 65),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
+              child: const Text('Send'),
             ),
           ],
         ),

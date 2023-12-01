@@ -1,3 +1,6 @@
+import 'package:connect_frontend/services/session_service.dart';
+import 'package:connect_frontend/services/user_service.dart';
+import 'package:connect_frontend/views/edit_profile.dart';
 import 'package:connect_frontend/views/home.dart';
 import 'package:connect_frontend/views/login.dart';
 import 'package:connect_frontend/views/profile.dart';

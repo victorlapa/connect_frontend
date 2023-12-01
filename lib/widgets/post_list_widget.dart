@@ -1,7 +1,6 @@
 import 'package:connect_frontend/models/post.dart';
 import 'package:connect_frontend/views/profile.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class PostListWidget extends StatelessWidget {
