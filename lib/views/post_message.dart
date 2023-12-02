@@ -1,7 +1,10 @@
 import 'dart:convert';
 import 'package:connect_frontend/models/send_post.dart';
 import 'package:connect_frontend/services/session_service.dart';
+import 'package:connect_frontend/views/home.dart';
+import 'package:connect_frontend/views/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:http/http.dart' as http;
 
 class TweetScreen extends StatefulWidget {
@@ -51,6 +54,62 @@ class _TweetScreenState extends State<TweetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: GNav(
+            gap: 4,
+            backgroundColor: Colors.white,
+            activeColor: Colors.red,
+            tabs: [
+              GButton(
+                icon: Icons.home,
+                text: 'Home',
+                textColor: Colors.black,
+                onPressed: () {
+                  if (ModalRoute.of(context)!.settings.name == '/') {
+                    // Do nothing if already on the home screen
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomeScreen(),
+                        settings: const RouteSettings(name: '/'),
+                      ),
+                    );
+                  }
+                },
+              ),
+              GButton(
+                icon: Icons.post_add,
+                text: 'Post',
+                textColor: Colors.black,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const TweetScreen()),
+                  );
+                },
+              ),
+              GButton(
+                active: true,
+                icon: Icons.person,
+                text: 'Profile',
+                textColor: Colors.black,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProfileScreen()),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

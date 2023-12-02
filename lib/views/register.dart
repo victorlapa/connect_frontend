@@ -1,7 +1,7 @@
 import 'dart:convert';
-
 import 'package:connect_frontend/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 class RegisterPage extends StatefulWidget {
@@ -19,17 +19,22 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _periodoController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  bool _isRegistering = false;
+  String _errorMessage = '';
+
   Future<void> _register() async {
+    setState(() {
+      _isRegistering = true;
+      _errorMessage = ''; // Reset error message when registration starts
+    });
+
     String name = _nameController.text;
     String email = _emailController.text;
     String tag = _usernameController.text;
     String curso = _cursoController.text;
-    int periodo = int.parse(_periodoController.text);
+    int periodo = int.tryParse(_periodoController.text) ?? 0;
     String password = _passwordController.text;
 
-    BuildContext? context = navigatorKey.currentContext;
-
-    // Add your API endpoint for registration
     String apiUrl = 'https://catolicaconnect-api.onrender.com/users';
 
     Map<String, dynamic> requestBody = {
@@ -41,9 +46,10 @@ class _RegisterPageState extends State<RegisterPage> {
       'password': password,
     };
 
+    BuildContext? context = navigatorKey.currentContext;
+
     if (context != null) {
       try {
-        // Make a POST request to your API
         final response = await http.post(
           Uri.parse(apiUrl),
           headers: {
@@ -52,20 +58,20 @@ class _RegisterPageState extends State<RegisterPage> {
           body: jsonEncode(requestBody),
         );
 
-        // Check the status code of the response
         if (response.statusCode == 200 || response.statusCode == 201) {
-          // Registration successful
           print('Registration successful');
-
-          // ignore: use_build_context_synchronously
           Navigator.pushNamed(context, '/login');
         } else {
-          // Registration failed
           print('Registration failed. Status code: ${response.statusCode}');
+          _errorMessage = 'Erro - ${response.statusCode} - ${response.body}';
         }
       } catch (error) {
-        // Handle any errors that occurred during the request
         print('Error during registration: $error');
+        _errorMessage = 'Error during registration. Please try again.';
+      } finally {
+        setState(() {
+          _isRegistering = false;
+        });
       }
     }
   }
@@ -87,6 +93,25 @@ class _RegisterPageState extends State<RegisterPage> {
               style: TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 labelText: 'Nome completo',
+                labelStyle: TextStyle(color: Colors.black),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 167, 33, 65),
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 167, 33, 65),
+                  ).copyWith(color: Colors.black.withOpacity(0.5)),
+                ),
+              ),
+            ),
+            SizedBox(height: 16),
+            TextField(
+              controller: _emailController,
+              style: TextStyle(color: Colors.black),
+              decoration: InputDecoration(
+                labelText: 'Email',
                 labelStyle: TextStyle(color: Colors.black),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
@@ -160,49 +185,41 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             SizedBox(height: 16),
             TextField(
-              controller: _periodoController,
-              style: TextStyle(color: Colors.black),
-              decoration: InputDecoration(
-                labelText: 'Periodo',
-                labelStyle: TextStyle(color: Colors.black),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color.fromARGB(255, 167, 33, 65),
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                controller: _periodoController,
+                style: TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  labelText: 'Periodo (apenas numeros)',
+                  labelStyle: TextStyle(color: Colors.black),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 167, 33, 65),
+                    ),
                   ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color.fromARGB(255, 167, 33, 65),
-                  ).copyWith(color: Colors.black.withOpacity(0.5)),
-                ),
-              ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 167, 33, 65),
+                    ).copyWith(color: Colors.black.withOpacity(0.5)),
+                  ),
+                )),
+            SizedBox(height: 16),
+            Text(
+              _errorMessage,
+              style: TextStyle(color: Colors.red),
             ),
             SizedBox(height: 16),
-            TextField(
-              controller: _emailController,
-              style: TextStyle(color: Colors.black),
-              decoration: InputDecoration(
-                labelText: 'Email',
-                labelStyle: TextStyle(color: Colors.black),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color.fromARGB(255, 167, 33, 65),
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color.fromARGB(255, 167, 33, 65),
-                  ).copyWith(color: Colors.black.withOpacity(0.5)),
-                ),
-              ),
-            ),
-            SizedBox(height: 32),
             ElevatedButton(
-              onPressed: _register,
-              child: Text('Register'),
+              onPressed: () {
+                if (!_isRegistering) {
+                  _register();
+                }
+              },
               style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(255, 167, 33, 65),
+                backgroundColor: Color.fromARGB(255, 167, 33, 65),
               ),
+              child: _isRegistering
+                  ? CircularProgressIndicator()
+                  : Text('Register'),
             ),
           ],
         ),
